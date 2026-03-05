@@ -1,6 +1,6 @@
 from fastapi import Depends, APIRouter, Body
 from sqlmodel import select
-from src.models import SessionDep,Movies
+from src.models import SessionDep, Movies
 
 movie_route = APIRouter(tags=["movie_management"])
 
@@ -9,6 +9,11 @@ movie_route = APIRouter(tags=["movie_management"])
 def home(db: SessionDep):
     statement = select(Movies)
     movies = db.exec(statement).all()
+    return movies
+
+@movie_route.get("/read_movie")
+def read_movie(db: SessionDep):
+    movies = db.query(Movies).all()
     return movies
 
 
