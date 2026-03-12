@@ -2,6 +2,7 @@ from fastapi import Depends, APIRouter, Body
 from sqlmodel import select
 from src.models import SessionDep, Movies
 
+
 movie_route = APIRouter(tags=["movie_management"])
 
 
@@ -28,4 +29,5 @@ def create_movie(db: SessionDep, data = Body(...)):
     )
     db.add(data_for_entry)
     db.commit()
+    db.refresh(data_for_entry)
     return "User created done."

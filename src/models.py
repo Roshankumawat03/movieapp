@@ -1,7 +1,6 @@
 from sqlmodel import SQLModel, Field, create_engine,Session
-from typing import Annotated, List
+from typing import Annotated
 from fastapi import Depends
-from datetime import date
 
 
 class Movies(SQLModel, table= True):
